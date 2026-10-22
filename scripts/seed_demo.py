@@ -35,13 +35,15 @@ def main() -> None:
     start -= timedelta(days=start.weekday())  # align to Monday
 
     bw = 78.0
-    for week in range(16):
+    for week in range(17):
         bw += random.uniform(0.0, 0.25)
         db.log_bodyweight(round(bw, 1), start + timedelta(weeks=week))
         for day, items in PLAN.items():
             if random.random() < 0.1:   # missed session
                 continue
             d = start + timedelta(weeks=week, days=DOW[day])
+            if d > date.today():
+                continue
             wid = db.get_or_create_workout(d)
             for name, base, gain, reps in items:
                 top = base + gain * week + random.choice([-2.5, 0, 0, 2.5])

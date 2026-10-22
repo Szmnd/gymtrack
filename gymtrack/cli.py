@@ -5,15 +5,12 @@
     gymtrack bw 82.5
     gymtrack prs
     gymtrack rate
-    gymtrack dash
+    gymtrack serve
 """
 
 from __future__ import annotations
 
-import subprocess
-import sys
 from datetime import date
-from pathlib import Path
 from typing import Optional
 
 import typer
@@ -120,10 +117,12 @@ def muscles():
 
 
 @app.command()
-def dash():
-    """Open the Streamlit dashboard."""
-    script = Path(__file__).with_name("dashboard.py")
-    subprocess.run([sys.executable, "-m", "streamlit", "run", str(script)])
+def serve(host: str = "127.0.0.1", port: int = 8000, reload: bool = False):
+    """Start the web UI (FastAPI + browser frontend)."""
+    import uvicorn
+
+    typer.echo(f"gymtrack UI at http://{host}:{port}")
+    uvicorn.run("gymtrack.api:app", host=host, port=port, reload=reload)
 
 
 @app.command("exercises")

@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "gymtrack"
-version = "0.1.0"
+version = "0.2.0"
 description = "Gym progress tracker with charts, muscle-group breakdown and strength ratings"
 readme = "README.md"
 requires-python = ">=3.10"
@@ -13,18 +13,21 @@ authors = [{name = "Szymon Denkowski"}]
 dependencies = [
     "typer>=0.12",
     "pandas>=2.0",
-    "plotly>=5.18",
-    "streamlit>=1.30",
+    "fastapi>=0.110",
+    "uvicorn[standard]>=0.27",
 ]
 
 [project.optional-dependencies]
-dev = ["pytest>=8", "ruff>=0.4"]
+dev = ["pytest>=8", "ruff>=0.4", "httpx>=0.27"]
 
 [project.scripts]
 gymtrack = "gymtrack.cli:app"
 
 [tool.setuptools.packages.find]
 include = ["gymtrack*"]
+
+[tool.setuptools.package-data]
+gymtrack = ["web/*"]
 
 [tool.ruff]
 line-length = 140
