@@ -15,7 +15,7 @@ No accounts, no sync, one SQLite file in `~/.gymtrack/`.
 ## Install
 
 ```bash
-git clone https://github.com/<you>/gymtrack && cd gymtrack
+git clone https://github.com/Szmnd/gymtrack && cd gymtrack
 python -m venv .venv && source .venv/bin/activate
 pip install -e ".[dev]"
 ```
